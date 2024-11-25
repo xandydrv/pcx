@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Nossa Escola: Robótica</title>
+    
+    <!-- Font Awesome (Para ícones) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Estilos Customizados -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+.carousel-item img {
+            width: 100%;
+            height: 400px; /* Defina a altura conforme necessário */
+            object-fit: cover;
+        }
+
+
+
+
+
+    
+        body {
+            background-color: #131516;
+            color: #301ddb;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: #074b8f;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        .content {
+            margin: 20px 0;
+        }
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(240, 239, 241, 0.753);
+        }
+
+        footer {
+            background-color: #177fe7;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="container text-center">
+        <img src="data:image/png;base64,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" alt="Minha foto" class="img-fluid">
+        <p class="lead">
+
+
+
+    
+<head>
+    
+    <title>Projeto Nossa Escola: Robótica</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #074b8f;
+            --secondary-color: #000000;
+            --text-color-light: #fff;
+            --text-color-dark: #fff6f6;
+            --background-light: #e4dcdc;
+            --background-dark: #302d2d;
+            --card-bg: #090975;
+            --box-shadow: 0 4px 8px rgba(253, 235, 235, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+        }
+
+        header {
+            background: var(--secondary-color);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        header p {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .navbar a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-light);
+        }
+
+        .section {
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .section h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1 1 calc(33.333% - 1rem);
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            max-width: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color-dark);
+        }
+
+        #redes-sociais {
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-light);
+        }
+
+        #redes-sociais a {
+            margin: 0 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        #redes-sociais a:hover {
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background: var(--background-dark);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .cards {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Projeto Nossa Escola: Robótica</h1>
+        <p>Colegio padre Claudio Morelli</p>
+        <p></p>
+        
+           
+           
+        <nav class="navbar">
+            <a href="#inicio" class="nav-link">Início</a>
+            <a href="#sobre-projeto" class="nav-link">Sobre</a>
+            <a href="#Projeto" class="nav-link">Projetos</a>
+            <a href="#redes-sociais" class="nav-link">Contato</a>
+        </nav>
+
+
+            
+           
+        <section class="robot-section">
+    <h3><i class="fas fa-robot"></i> </h3>
+    <div class="thinking-robot">
+        <i class="fas fa-robot"></i>
+    </div>
+</section>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+           
+        
+    </header>
+
+    
+
+
+
+
+
+
+    
+<body>
+
+
+
+
+
+
+
+
+
+
+
+<section id="inicio" class="section">
+    <h3>Como surgiu a ideia do projeto</h3>
+    </p> O projeto surgiu como uma expansão do projeto "Nossa Escola", com o objetivo de explorar e explicar o funcionamento e a importância de diversos setores dentro da escola, neste caso apresentando sobre robótica.
+    projeto nossa escola:
+</p>
+    <img class="imagem-robotica" src="https://i.pinimg.com/736x/cc/11/64/cc11644c885c28a757d709abb39479e9.jpg" alt="Braço Robótico">
+</section>
+
+
+
+
+
+<section id="inicio" class="section">
+    <h3>A importância da escola na sociedade</h3>
+    </p> A escola é mais do que um prédio com salas de aula. É um espaço de construção de sonhos, onde cada criança e jovem encontra as bases para um futuro digno e pleno. Investir na educação escolar não é apenas uma necessidade, mas um compromisso com um mundo melhor. Afinal, ao fortalecer as escolas, fortalecemos a sociedade como um todo. A escola desempenha um papel essencial na construção de uma sociedade saudável, inclusiva e inovadora. Mais do que um espaço de aprendizado acadêmico, a escola é um ambiente de socialização, formação ética e desenvolvimento integral do indivíduo. É nela que crianças e jovens têm a oportunidade de adquirir conhecimentos que transcendem livros e provas, preparando-os para enfrentar os desafios da vida e contribuir para o progresso coletivo.
+
+</p> 
+A educação escolar é uma das ferramentas mais poderosas para promover igualdade e reduzir desigualdades sociais. Quando acessível e de qualidade, a escola oferece a todos a chance de alcançar seus objetivos, independentemente de origem, etnia ou condição socioeconômica. Ao ensinar valores como respeito, responsabilidade e empatia, ela ajuda a formar cidadãos conscientes, capazes de atuar ativamente na sociedade. A escola também é um lugar onde as pessoas aprendem a conviver em sociedade. Ao interagir com colegas, professores e funcionários, os alunos desenvolvem habilidades de comunicação, resolução de conflitos e trabalho em equipe, competências fundamentais em qualquer esfera da vida. Para muitos, a escola também representa um refúgio, um espaço seguro em que recebem apoio emocional e nutricional, especialmente em comunidades vulneráveis.
+
+</p>
+</p>
+
+
+
+<img class="imagem-robotica" src="https://i.pinimg.com/736x/6c/01/44/6c0144ab5f3201927a18ca20efe7edac.jpg">
+
+</section>
+
+
+
+
+
+
+<section id="sobre-projeto" class="section">
+    <h3>Sobre a Robótica Escolar</h3>
+    <p> O Colégio Estadual Padre Cláudio Morelli, possui um programa de robótica robusto que tem alcançado bastante destaque em competições nacionais e internacionais. Uma das equipes de robótica do colégio, chamada "Roosters", participa da First Robotics Competition (FRC), uma modalidade que envolve construção e programação de robôs para realizar tarefas complexas. Nessa competição, os robôs podem ter até 1,5 metro de altura e 55 kg. A equipe já representou o Paraná em eventos como o Festival SESI de Robótica, mostrando competência em mecânica, programação e gestão de projetos​.</p>
+    
+    <p> Além da FRC, o colégio também promove atividades na First Lego League (FLL) e na Olimpíada Brasileira de Robótica (OBR), com foco em solucionar problemas reais usando automação e tecnologia. Os alunos aprendem não apenas habilidades técnicas como programação e eletrônica, mas também gestão, liderança e marketing, pois as equipes funcionam como pequenas empresas</p>
+    
+    <img class="imagem-robotica" src="https://i.pinimg.com/736x/ae/c3/ef/aec3ef4271becf48a44921a34f0cd20d.jpg" alt="Braço Robótico">
+</section>
+
+
+
+
+<section id="inicio" class="section">
+    <h3>Historia da Escola</h3>
+    </p> 
+   Para falarmos da escola antes precisamos falar do bairro onde ela esta inserida,para muitos um lugar passifico para outros o Fim do Mundo,simoplesmente, O bairro Umbará élocalizado na região sul de Curitiba, tem uma história rica e culturalmente única, com raízes que remontam a 1887. Inicialmente, foi colonizado por imigrantes italianos que encontraram um território isolado devido à dificuldade de acesso e às condições adversas das estradas, marcadas pela lama e precariedade. Esse isolamento geográfico contribuiu para a formação de uma identidade singular entre seus moradores, que desenvolveram modos de vida próprios.
+
+Ao longo dos anos, o Umbará manteve um forte vínculo com suas tradições e valores comunitários, sendo marcado pela agricultura familiar e pela influência cultural italiana. Apesar de sua distância do centro urbano, o bairro foi crescendo e se estruturando, sempre valorizando suas raízes históricas.
+
+No âmbito educacional, o Colégio Estadual Padre Cláudio Morelli é uma das instituições mais importantes da região, fundado em 1912 como uma escola paroquial administrada pelas Irmãs do Sagrado Coração de Jesus. Desde o início, a escola desempenhou um papel vital na formação cultural e social dos jovens do bairro, refletindo não apenas as diretrizes pedagógicas da época, mas também incorporando e transmitindo a cultura local. A escola se tornou um espaço de integração, preservação e fortalecimento da identidade "umbaraense", criando um elo significativo entre a educação e a comunidade.
+
+Hoje, o Colégio Padre Cláudio Morelli é mais do que um centro de ensino; é um símbolo da história e do desenvolvimento do Umbará, conectando o passado de imigrantes pioneiros ao presente de uma comunidade orgulhosa de sua trajetória. Além de sua contribuição educacional, a escola também tem um papel ativo em eventos culturais e sociais que promovem a união dos moradores e a valorização de suas origens.
+
+
+
+
+
+
+.
+<p>
+
+
+    <img src="https://i.pinimg.com/736x/ce/32/43/ce324313b2c399145cfd73450156f001.jpg"alt="Minha foto" class="img-fluid">
+    <p class="lead">
+
+
+<section id="inicio" class="section">
+    <h3>Historia da Manna</h3>
+    </p> 
+    equipe Roosters, criada em 2017 pela Associação Internacional para Desenvolvimento Tecnológico (AIDTEC), é um projeto de extensão da Universidade Federal Tecnológica do Paraná (UTFPR), campus Medianeira, que participa da FIRST Robotics Competition (FRC). A iniciativa começou com apenas 10 estudantes do Ensino Médio e 5 mentores acadêmicos, mas rapidamente se destacou.
+
+Sua estreia em competições aconteceu nos Estados Unidos, em 2018, na Regional de Nova York, realizada no Instituto Tecnológico de Rochester. Inicialmente, a sede da equipe ficava no Colégio Bertoni, mas em 2020 foi transferida para o Colégio Estadual Padre Cláudio Morelli, onde permanece até hoje. Em 2020, a Roosters competiu na Regional de Los Angeles, marcando mais um importante passo em sua trajetória.
+
+Atualmente, o time conta com aproximadamente 50 integrantes que trabalham intensamente no laboratório da equipe, carinhosamente chamado de Hen House. Lá, os alunos se dedicam ao desenvolvimento de robôs e à promoção dos valores da FIRST, como inclusão, trabalho em equipe e inovação, com o objetivo de inspirar outros jovens a explorarem o mundo da tecnologia e ciência.
+
+A Roosters não se limita às competições. Eles também desenvolvem projetos de impacto social e iniciativas educacionais que promovem a democratização do acesso à ciência e à robótica, buscando engajar mais estudantes e fortalecer a cultura STEM (Ciência, Tecnologia, Engenharia e Matemática). Além disso, a equipe é conhecida por seu espírito colaborativo, frequentemente ajudando outros times e promovendo eventos para expandir a comunidade FIRST no Brasil.
+</p>
+
+
+<img src="https://static.wixstatic.com/media/2b4db9_eda03ed05fc044b2ae58eafb25bf1e15~mv2.png/v1/fill/w_560,h_318,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.png">
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+        
+        <p> <section id="sobre" class="section">
+            <h3>Investimentos </h3>
+            <p> Recentemente, o governo estadual investiu em equipamentos e kits de robótica, fortalecendo programas como o Robótica Paraná, que atende escolas públicas, incluindo o Morelli​, a escola ganhou muitos suportes, e esses suportes permitem que os projetos sejam conduzidos com recursos adequados e alinhados às competições e demandas educacionais
+        </p>
+        <img src="https://i.pinimg.com/474x/46/56/12/465612235fcd95a1434b551f1138d239.jpg" alt="Braço Robótico">
+    
+
+
+    
+    </section>
+    </p>
+    
+</p>
+
+
+
+
+
+
+ <section id="sobre" class="section">   
+<h3>Oque a robotics ajuda</h3>
+        <p> Desensolvar as  habilidades STEAM (Ciencia,tecnologia,Arte e Matemática) dos alunos e fazendo com que eles aprendam a resolver problemas no dia a dia  </p>
+
+    <img src=" https://i.pinimg.com/736x/9a/90/e5/9a90e5dc3e04a4484615e81bb6217760.jpg "
+
+
+
+
+
+
+
+section id="sobre" class="section">
+    
+    <p> <section id="sobre" class="section">
+        <h3>Equipes da robotica</h3>
+        <p>  A robotica é dividida em duas equipes sendo a  Roosters FRC e Doctors Machines FLL. 
+            
+        
+        
+        
+    
+            Os Roosters RFC participam da FIRST Robotics Competition (FRC) desde 2018, sendo uma equipe reconhecida na comunidade de robótica internacional. Eles trabalham em parceria com a equipe Manna e têm histórico de competições em eventos regionais e internacionais, como no Brasil, Los Angeles e Istambul. Apesar de desafios em algumas temporadas, conquistaram prêmios como o de Empreendedorismo e Finalista da Lista do Decano da FIRST em 2019​
+            </p>
+
+<p>   Já a Doctors Machines, ativa desde 2015, participa do FIRST LEGO League (FLL) e se concentra em projetos inovadores de design e pesquisa. A equipe é composta por estudantes de 12 a 17 anos, que trabalham sob os valores centrais do FLL, unindo aprendizado técnico e desenvolvimento moral. Eles possuem conquistas importantes, como classificação para etapas nacionais e prêmios de inovação, o que demonstra seu compromisso com a excelência e a superação constante</p>
+
+
+       
+<section id="sobre" class="section">
+    <h3>Responsavel</h3>
+    <p> Os projetos de robótica do Colégio Estadual Padre Cláudio Morelli, são liderados e coordenados por professores especializados na área de tecnologia e inovação. Um nome de destaque é o do professor Thadeu Miqueletto, que é mencionado como o coordenador da equipe Roosters, responsável pela participação do colégio na First Robotics Competition (FRC). Ele desempenha um papel fundamental no treinamento e orientação dos alunos, ajudando a desenvolver tanto as competências técnicas quanto as habilidades de gestão necessárias para os projetos​
+    </p>
+    <img src="https://i.pinimg.com/474x/3c/e9/49/3ce9491b803b34a8cef1de3c00dde666.jpg"
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Carrossel de Projetos Adicionais -->
+    <section class="carousel-section">
+        <h3 >Algumas conquista </h3>
+        <div class="carousel">
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                    <li class="carousel-slide current-slide">
+                        <img src="https://i.pinimg.com/474x/54/b4/5a/54b45a08d8b7f8fe3978bde609f66db2.jpg" alt="escada">
+                        <p>Equipe FLL na TV.</p>
+                    </li>
+                    <li class="carousel-slide">
+                        <img src="https://i.pinimg.com/736x/57/db/fe/57dbfe17ba563a25e4b81d9bdd6e77d6.jpg" alt="Projeto 5">
+                        <p>Equipe FLL trabalhando.</p>
+                    </li>
+                    <li class="carousel-slide">
+                        <img src="https://i.pinimg.com/474x/10/5f/54/105f54f71f0f6fd4f42064d7928d875d.jpg" alt="Projeto 6">
+                        <p>Equipe Roosters em Brasília após apresentar seus projetos e ganhar o devido conhecimento.</p>
+                    </li>
+                    <li class="carousel-slide">
+                        <img src="https://i.pinimg.com/474x/ab/7d/2c/ab7d2c1330eea5a39874a4f8e5fbf893.jpg" class="d-block w-100" alt="Projeto 7">
+                        <p>Equipe Roosters criando seus projetos.</p>
+                    </li>
+                </ul>
+            </div>
+            <button class="carousel-button left-button"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-button right-button"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+    
+    
+
+    <section id="Projeto" class="section">
+        <h3>Projetos de Destaque</h3>
+        <div class="card">
+            <div class="card">
+                <img src="https://i.pinimg.com/474x/98/e8/75/98e875e1d98d61b92fd9279c5b59addd.jpg" alt="Robô Seguidor de Linha">
+                <h4>Folha informativa</h4>
+                <p>Utilizamos para entender o que devemos fazer na programação.</p>
+            </div>
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/70/99/c6/7099c6e63f3e6be2346ef095ee53b73d.jpg" alt="Braço Robótico"> 
+                <h4>TINTERCARD</h4>
+                <p>Plataforma para desenvolvermos nossos projetos.</p>
+            </div>
+            <div class="card">
+                <img src="https://i.pinimg.com/474x/0c/bd/c6/0cbdc62ba64c4a07fd310bb10b757a95.jpg" alt="Drone Escolar">
+                <h4>ARDUINO UNO</h4>
+                <p>Utilizamos para completar o projeto, através do código, fazendo o projeto ficar completo.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    
+    </section>
+    
+
+
+
+    
+    
+    <section id="redes-sociais" class="section">
+        <h3>Entre em Contato para Fazer Negocios.
+        </h3>
+        <a href="https://github.com/xandydrv" target="">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+    
+            <a href="https://wa.me/5541998644465" target="">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+
+        
+    </section>
+    
+    <footer>
+        <p>&copy; Criado por Xandy, Lucas G, Cris e Kaio.</p>
+    </footer>
+
+    
+    
+    <a href="#" id="back-to-top" class="btn btn-primary" style="display: none;"></a>
+    
+    <script>
+        // Mostrar ou esconder o botão
+        window.onscroll = function() {
+            const button = document.getElementById('back-to-top');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        };
+    
+        // Rolagem suave para o topo
+        document.getElementById('back-to-top').onclick = function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      
+    
+    </script>
+</body>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
+
+<section id="Projeto" class="section">
+        <h3>Videos De Como Trabalhamos.</h3>
+        <h2>👇🏻</h2>
+
+<a href="https://xandydrv.github.io/ytz/" target="_blank" class="view-project-btn">
+    Veja o Projeto ao Vivo
+    
+</a>
+
+<style>
+    
+    .view-project-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #007BFF; /* Azul */
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .view-project-btn:hover {
+        background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+    }
+</style>
